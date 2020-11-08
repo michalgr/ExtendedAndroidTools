@@ -13,7 +13,11 @@ endif
 
 $(ANDROID_BUILD_DIR)/flex.done: $(ANDROID_BUILD_DIR)/flex
 	cd $(ANDROID_BUILD_DIR)/flex && make -j $(THREADS)
-	cd $(ANDROID_BUILD_DIR)/flex/src && make install-libLTLIBRARIES install-binPROGRAMS install-includeHEADERS
+	cd $(ANDROID_BUILD_DIR)/flex/src && make \
+		install-libLTLIBRARIES \
+		install-binPROGRAMS \
+		install-includeHEADERS \
+		install-pkgconfigDATA
 	touch $@
 
 $(ANDROID_BUILD_DIR)/flex: $(ANDROID_STANDALONE_TOOLCHAIN_DIR) | $(ANDROID_BUILD_DIR)
