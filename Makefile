@@ -33,6 +33,7 @@ $(ANDROID_OUT_DIR) $(HOST_OUT_DIR):
 	mkdir $@/bin
 	mkdir $@/include
 	mkdir $@/lib
+	mkdir $@/lib/pkgconfig
 
 # we need to copy libc++_shared.so, it's part of the toolchain but it's not
 # present on android system

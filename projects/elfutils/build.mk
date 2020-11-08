@@ -16,9 +16,10 @@ ELFUTILS_EXTRA_CFLAGS += -Dprogram_invocation_short_name=\\\"no-program_invocati
 ELFUTILS_EXTRA_LDFLAGS = -L$(abspath $(ANDROID_OUT_DIR)/lib)
 ELFUTILS_EXTRA_ENV_DEFS = CFLAGS="$(ELFUTILS_EXTRA_CFLAGS)" LDFLAGS="$(ELFUTILS_EXTRA_LDFLAGS)"
 
-$(ANDROID_BUILD_DIR)/elfutils.done: $(ANDROID_BUILD_DIR)/elfutils
+$(ANDROID_BUILD_DIR)/elfutils.done: $(ANDROID_BUILD_DIR)/elfutils $(ANDROID_OUT_DIR)
 	cd $(ANDROID_BUILD_DIR)/elfutils/lib && make -j $(THREADS)
 	cd $(ANDROID_BUILD_DIR)/elfutils/libelf && make install -j $(THREADS)
+	cp $(ANDROID_BUILD_DIR)/elfutils/config/libelf.pc $(ANDROID_OUT_DIR)/lib/pkgconfig/
 	touch $@
 
 $(ANDROID_BUILD_DIR)/elfutils: $(ANDROID_STANDALONE_TOOLCHAIN_DIR)
