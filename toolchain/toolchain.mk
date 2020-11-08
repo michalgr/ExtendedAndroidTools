@@ -26,7 +26,6 @@ ANDROID_EXTRA_CONFIGURE_FLAGS = --host=$(ANDROID_TRIPLE) --prefix=$(abspath $(AN
 ANDROID_CMAKE_CXXFLAGS = -I $(abspath $(ANDROID_OUT_DIR))/include
 ANDROID_CMAKE_LDFLAGS = -L $(abspath $(ANDROID_OUT_DIR))/lib
 ANDROID_CMAKE_LDFLAGS += -Wl,-rpath-link -Wl,$(abspath $(ANDROID_OUT_DIR))/lib
-ANDROID_CMAKE_LDFLAGS += "-pie"
 
 export PATH := $(abspath $(ANDROID_STANDALONE_TOOLCHAIN_DIR))/bin:$(PATH)
 
