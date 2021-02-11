@@ -19,5 +19,6 @@
 .vagrant/
 ubuntu-bionic-18.04-cloudimg-console.log
 
+bpftools-arm.tar.gz
 bpftools-arm64.tar.gz
 bpftools-x86_64.tar.gz
