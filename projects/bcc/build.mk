@@ -26,6 +26,10 @@ BCC_EXTRA_CFLAGS += "-I$(abspath projects/bcc/android_fixups)"
 # stl we're building with provides std::make_unique, do not redefine it
 BCC_EXTRA_CFLAGS += "-D__cpp_lib_make_unique"
 
+ifeq ($(NDK_ARCH), arm)
+BCC_EXTRA_CMAKE_FLAGS += -DENABLE_USDT=OFF
+endif
+
 $(ANDROID_BUILD_DIR)/bcc.done: $(ANDROID_BUILD_DIR)/bcc
 ifeq ($(BUILD_TYPE), Debug)
 	cd $(ANDROID_BUILD_DIR)/bcc && $(MAKE) install -j $(THREADS)
@@ -44,6 +48,7 @@ $(ANDROID_BUILD_DIR)/bcc: | $(ANDROID_BUILD_DIR)
 		CFLAGS="$(BCC_EXTRA_CFLAGS)" LDFLAGS="$(ANDROID_CMAKE_LDFLAGS)" \
 		$(CMAKE) $(BCC_SOURCES) \
 		$(ANDROID_EXTRA_CMAKE_FLAGS) \
+		$(BCC_EXTRA_CMAKE_FLAGS) \
 		-DFLEX_EXECUTABLE=$(abspath $(HOST_OUT_DIR)/bin/flex) \
 		-DBPS_LINK_RT=OFF \
 		-DPYTHON_CMD=python3.6

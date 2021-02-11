@@ -9,6 +9,9 @@ CMAKE_ABI = arm64-v8a
 else ifeq ($(NDK_ARCH), x86_64)
 ANDROID_TRIPLE = x86_64-linux-android
 CMAKE_ABI = x86_64
+else ifeq ($(NDK_ARCH), arm)
+ANDROID_TRIPLE = arm-linux-androideabi
+CMAKE_ABI = armeabi-v7a
 else
 $(error unknown abi $(NDK_ARCH))
 endif
