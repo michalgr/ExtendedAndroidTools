@@ -24,8 +24,8 @@ $(ANDROID_OUT_DIR)/share/bpftrace/tools:
 	mkdir -p $@
 	cp $(BPFTRACE_SOURCES)/tools/*.bt $@
 
-BPFTRACE_COMMIT = f94e0188ace7fe999f5032e6bbf696b5078f6918
-BPFTRACE_REPO = https://github.com/iovisor/bpftrace.git/
+BPFTRACE_COMMIT = ca6b047cbad182748fc615b82098369556bfdb76
+BPFTRACE_REPO = https://github.com/michalgr/bpftrace.git/
 projects/bpftrace/sources:
 	git clone $(BPFTRACE_REPO) $@
 	cd $@ && git checkout $(BPFTRACE_COMMIT)
