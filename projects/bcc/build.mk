@@ -36,8 +36,8 @@ $(BCC_ANDROID_BUILD_DIR): $(HOST_OUT_DIR)/bin/flex
 		-DENABLE_TESTS=OFF \
 		-DPYTHON_CMD=python3.6
 
-BCC_COMMIT = v0.24.0
-BCC_REPO = https://github.com/iovisor/bcc
+BCC_COMMIT = add_zip_support
+BCC_REPO = https://github.com/michalgr/bcc
 projects/bcc/sources:
 	git clone $(BCC_REPO) $@
 	cd $@ && git checkout $(BCC_COMMIT)
