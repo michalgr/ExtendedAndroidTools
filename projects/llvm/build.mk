@@ -5,6 +5,8 @@ $(eval $(call project-define,llvm))
 
 ifeq ($(NDK_ARCH), arm64)
 LLVM_HOST_TRIPLE = aarch64-none-linux-gnu
+else ifeq ($(NDK_ARCH), armv7)
+LLVM_HOST_TRIPLE = arm-none-linux-gnueabi
 else ifeq ($(NDK_ARCH), x86_64)
 LLVM_HOST_TRIPLE = x86_64-none-linux-gnu
 else

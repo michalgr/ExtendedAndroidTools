@@ -4,6 +4,8 @@ CMAKE = $(abspath $(HOST_OUT_DIR)/bin/cmake)
 
 ifeq ($(NDK_ARCH), arm64)
 CMAKE_ABI = arm64-v8a
+else ifeq ($(NDK_ARCH), armv7)
+CMAKE_ABI = armeabi-v7a
 else ifeq ($(NDK_ARCH), x86_64)
 CMAKE_ABI = x86_64
 else

@@ -10,6 +10,8 @@ include toolchain/cmake.mk
 
 ifeq ($(NDK_ARCH), arm64)
 LIBCPP_ABI = arm64-v8a
+else ifeq ($(NDK_ARCH), armv7)
+LIBCPP_ABI = armeabi-v7a
 else ifeq ($(NDK_ARCH), x86_64)
 LIBCPP_ABI = x86_64
 else
