@@ -1,0 +1,20 @@
+name: Test buck on ci
+
+on: [push, pull_request]
+
+jobs:
+  test_buck:
+    name: Installs buck and checks it can successfully run
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install deps
+      run: sudo ./scripts/bionic-install-deps.sh
+    - name: Setup ndk
+      run: ./scripts/download-ndk.sh
+    - name: Install buck
+      run: ./scripts/install-buck.sh
+    - name: Generate buckconfig
+      run: make out/buckconfig NDK_PATH=`pwd`/android-ndk-r23b
+    - name: Run buck
+      run: ./buck -h
