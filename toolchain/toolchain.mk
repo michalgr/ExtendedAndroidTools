@@ -6,6 +6,7 @@ ANDROID_TOOLCHAIN_PATH = \
     $(abspath $(NDK_PATH)/toolchains/llvm/prebuilt/linux-x86_64/bin)
 
 include toolchain/autotools.mk
+include toolchain/buck.mk
 include toolchain/cmake.mk
 
 ifeq ($(NDK_ARCH), arm64)
