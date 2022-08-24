@@ -1,0 +1,21 @@
+name: Test buck on ci
+
+on: [push, pull_request]
+
+jobs:
+  test_buck:
+    name: Installs buck and checks it can successfully run
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK 8
+      uses: actions/setup-java@v3
+      with:
+        java-version: '8'
+        distribution: 'adopt'
+    - name: Setup ndk
+      run: ./scripts/download-ndk.sh
+    - name: Setup buck
+      run: make setup-buck NDK_PATH=`pwd`/android-ndk-r23b
+    - name: Run buck
+      run: eval `make setup-env` && buck -h
