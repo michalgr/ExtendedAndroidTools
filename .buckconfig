@@ -1,0 +1,4 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+
+<?file:out/ndk.buckconfig>
+<?file:out/python.buckconfig>

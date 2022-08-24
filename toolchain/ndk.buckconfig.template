@@ -1,0 +1,4 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+
+[ndk]
+  ndk_path = <NDK_PATH>
