@@ -1,6 +1,12 @@
 # Copyright (c) Meta Platforms, Inc. and affiliates.
 
 BUCK = $(abspath $(HOST_OUT_DIR)/opt/buck)
+BUCK_OUT = buck-out
+
+clean: clean-buck-out
+
+clean-buck-out:
+	-rm -fr $(BUCK_OUT)
 
 out/ndk.buckconfig: | $(OUT_DIR)
 	cp toolchain/ndk.buckconfig.template $@
@@ -15,4 +21,4 @@ buckconfig: out/python.buckconfig
 
 setup-buck: buck-host buckconfig
 
-.PHONY: buckconfig
+.PHONY: buckconfig blean-buck-out setup-buck
