@@ -17,6 +17,8 @@ apt-get install -y \
      libssl-dev \
      libtool \
      make \
+     openjdk-8-jdk \
+     openjdk-8-jre \
      pkg-config \
      po4a \
      texinfo \

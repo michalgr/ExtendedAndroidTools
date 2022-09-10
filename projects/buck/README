@@ -1,0 +1,8 @@
+buck
+https://buck.build/
+
+github: https://github.com/facebook/buck
+license: Apache 2.0
+license url: https://github.com/facebook/buck/blob/main/LICENSE
+
+Default version: v2022.05.05.01
