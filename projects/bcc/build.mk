@@ -29,8 +29,8 @@ $(BCC_ANDROID_BUILD_DIR): $(HOST_OUT_DIR)/bin/flex
 		-DCMAKE_USE_LIBBPF_PACKAGE=ON \
 		-DPYTHON_CMD=$(abspath $(HOST_OUT_DIR)/bin/python3.10-no--install-layout)
 
-BCC_COMMIT = dcd8a9adf9972d819505cbf1c0957f06f528b131
-BCC_REPO = https://github.com/iovisor/bcc
+BCC_COMMIT = mini_debuginfo
+BCC_REPO = https://github.com/michalgr/bcc
 projects/bcc/sources:
 	git clone $(BCC_REPO) $@
 	cd $@ && git checkout $(BCC_COMMIT)
