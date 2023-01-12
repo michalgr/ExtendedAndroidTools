@@ -20,11 +20,7 @@ endif
 STRIP_THUNK = $(HOST_OUT_DIR)/bpftrace-strip-thunk
 
 $(BPFTRACE_ANDROID): $(ANDROID_OUT_DIR)/lib/libc++_shared.so
-ifeq ($(BUILD_TYPE), Debug)
 	cd $(BPFTRACE_ANDROID_BUILD_DIR) && $(MAKE) install -j $(THREADS)
-else
-	cd $(BPFTRACE_ANDROID_BUILD_DIR) && $(MAKE) install/strip -j $(THREADS)
-endif
 	cp $(BPFTRACE_SRCS)/LICENSE $(ANDROID_OUT_DIR)/licenses/bpftrace
 	touch $@
 
