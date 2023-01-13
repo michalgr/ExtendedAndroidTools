@@ -10,7 +10,7 @@ BPFTRACE_EXTRA_CFLAGS = "-I$(abspath $(ANDROID_OUT_DIR))/include"
 ifeq ($(STATIC_LINKING),true)
 BPFTRACE_EXTRA_CMAKE_FLAGS = -DSTATIC_LINKING=ON
 
-# XXX: As od 925127c5 ("Make bcc depend on liblzma") we're building libbcc
+# XXX: As of 925127c5 ("Make bcc depend on liblzma") we're building libbcc
 # with lzma support, but bpftrace currently doesn't have a way to detect this
 # dependency, which causes undefined symbol errors when linking statically.
 # This fixes it by adding liblzma to the link line.
