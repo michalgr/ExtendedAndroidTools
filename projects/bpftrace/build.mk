@@ -32,6 +32,7 @@ $(BPFTRACE_ANDROID_BUILD_DIR): $(HOST_OUT_DIR)/bin/flex $(STRIP_THUNK)
 	cd $@ && LDFLAGS="$(BPFTRACE_EXTRA_LDFLAGS)" $(CMAKE) $(BPFTRACE_SRCS) \
 		$(ANDROID_EXTRA_CMAKE_FLAGS) \
 		$(BPFTRACE_EXTRA_CMAKE_FLAGS) \
+		-DUSE_SYSTEM_LIBBPF=ON \
 		-DBUILD_TESTING=OFF \
 		-DENABLE_MAN=OFF \
 		-DFLEX_EXECUTABLE=$(abspath $(HOST_OUT_DIR)/bin/flex) \
@@ -43,7 +44,7 @@ $(STRIP_THUNK): projects/bpftrace/strip-thunk | $(HOST_OUT_DIR)
 	@sed -e "s+<STRIP_PATH>+$(ANDROID_TOOLCHAIN_STRIP_PATH)+g" $< > $@
 	chmod +x $@
 
-BPFTRACE_COMMIT = v0.24.1
+BPFTRACE_COMMIT = 2d98d2d1072dae620d6cc542071c5b3d153064a7
 BPFTRACE_REPO = https://github.com/iovisor/bpftrace.git/
 projects/bpftrace/sources:
 	git clone $(BPFTRACE_REPO) $@ && \
