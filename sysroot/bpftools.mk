@@ -17,24 +17,19 @@ BPFTOOLS = $(ANDROID_SYSROOTS_OUT_DIR)/bpftools
 BPFTOOLS_TAR = bpftools-$(NDK_ARCH).tar.gz
 bpftools: $(BPFTOOLS_TAR)
 
-BPFTOOLS_MIN = $(ANDROID_SYSROOTS_OUT_DIR)/bpftools-min
-BPFTOOLS_MIN_TAR = bpftools-min-$(NDK_ARCH).tar.gz
-bpftools-min: $(BPFTOOLS_MIN_TAR)
-
 $(BPFTOOLS_TAR): $(BPFTOOLS)
-$(BPFTOOLS_MIN_TAR): $(BPFTOOLS_MIN)
-$(BPFTOOLS_TAR) $(BPFTOOLS_MIN_TAR):
+$(BPFTOOLS_TAR):
 	tar -zcf $@ $^ --owner=0 --group=0 \
 		--transform="s|^$(ANDROID_SYSROOTS_OUT_DIR)/||"
 
-$(BPFTOOLS) $(BPFTOOLS_MIN): $(ANDROID_SYSROOTS_OUT_DIR)
-$(BPFTOOLS) $(BPFTOOLS_MIN): sysroot/setup.sh
-$(BPFTOOLS) $(BPFTOOLS_MIN): sysroot/run.sh
-$(BPFTOOLS) $(BPFTOOLS_MIN): sysroot/wrapper.sh.template
-$(BPFTOOLS) $(BPFTOOLS_MIN): $(call project-android-target,bcc)
-$(BPFTOOLS) $(BPFTOOLS_MIN): $(call project-android-target,bpftrace)
-$(BPFTOOLS) $(BPFTOOLS_MIN): $(call project-android-target,xz)
-$(BPFTOOLS) $(BPFTOOLS_MIN): $(ANDROID_OUT_DIR)/lib/libc++_shared.so
+$(BPFTOOLS): $(ANDROID_SYSROOTS_OUT_DIR)
+$(BPFTOOLS): sysroot/setup.sh
+$(BPFTOOLS): sysroot/run.sh
+$(BPFTOOLS): sysroot/wrapper.sh.template
+$(BPFTOOLS): $(call project-android-target,bcc)
+$(BPFTOOLS): $(call project-android-target,bpftrace)
+$(BPFTOOLS): $(call project-android-target,xz)
+$(BPFTOOLS): $(ANDROID_OUT_DIR)/lib/libc++_shared.so
 $(BPFTOOLS): $(call project-android-target,python)
 
 $(BPFTOOLS):
@@ -66,29 +61,6 @@ $(BPFTOOLS):
 	$(call gen-wrapper,bpftrace-aotrt)
 	$(call gen-wrapper,python3.10)
 	cp $@/python3.10 $@/python3
-	$(call gen-wrapper,xzcat)
-
-	cp -r $(ANDROID_OUT_DIR)/licenses $@/licenses
-
-$(BPFTOOLS_MIN):
-	mkdir -p $@/bin
-	cp $(ANDROID_OUT_DIR)/bin/bpftrace $@/bin/
-	cp $(ANDROID_OUT_DIR)/bin/xzcat $@/bin/
-
-	mkdir -p $@/lib
-	cp $(ANDROID_OUT_DIR)/lib/libbcc_bpf.so $@/lib/
-	cp -a $(ANDROID_OUT_DIR)/lib/libbpf.so* $@/lib/
-	cp $(ANDROID_OUT_DIR)/lib/libclang.so $@/lib/
-	cp $(ANDROID_OUT_DIR)/lib/libc++_shared.so $@/lib/
-	cp -a $(ANDROID_OUT_DIR)/lib/libelf*.so* $@/lib/
-	cp $(ANDROID_OUT_DIR)/lib/liblzma.so $@/lib/
-
-	mkdir -p $@/share
-	cp -a $(ANDROID_OUT_DIR)/share/bpftrace $@/share/
-
-	cp -r sysroot/run.sh $@/
-	$(GEN_SETUP_SCRIPT)
-	$(call gen-wrapper,bpftrace)
 	$(call gen-wrapper,xzcat)
 
 	cp -r $(ANDROID_OUT_DIR)/licenses $@/licenses
